@@ -1,0 +1,110 @@
+/* tokens.css — design tokens. See DECISIONS.md "Fase 2 — Design plan" for the reasoning. */
+
+:root {
+  /* --- Colore: palette ispirata a Torino, non ai cliché da landing page --- */
+  --color-ink: #23211d; /* Grigio Portico scuro — testo */
+  --color-ink-soft: #5b5850; /* Grigio Portico — testo secondario, bordi */
+  --color-paper: #efeeE9; /* Pietra chiara — sfondo */
+  --color-paper-raised: #ffffff; /* superfici sollevate (card, drawer) */
+  --color-ochre: #9c6a1f; /* Ocra Sabauda (scurita per il contrasto: #c8862e con testo bianco sopra dava 3.04:1, sotto la soglia WCAG AA 4.5:1 — questa versione dà 4.67:1) — accento primario, CTA */
+  --color-ochre-ink: #6e4413; /* ocra scurita, per testo su sfondo ocra chiaro */
+  --color-tram: #2f6b4f; /* Verde Tram — conferme, "Ci vado", successo */
+  --color-tram-ink: #163d2b;
+  --color-brick: #a23b2e; /* Rosso Mattone — errori, azioni distruttive */
+  --color-brick-ink: #6e2419;
+  --color-dusk: #33465c; /* Blu Sera — link, info */
+  --color-border: #d8d4c8;
+
+  --surface-0: var(--color-paper);
+  --surface-1: var(--color-paper-raised);
+  --surface-2: #e4e1d7;
+  --text-1: var(--color-ink);
+  --text-2: var(--color-ink-soft);
+  --accent: var(--color-ochre);
+  --accent-ink: var(--color-ochre-ink);
+  --confirm: var(--color-tram);
+  --confirm-ink: var(--color-tram-ink);
+  --danger: var(--color-brick);
+  --danger-ink: var(--color-brick-ink);
+  --link: var(--color-dusk);
+  --focus-ring: #1a56db;
+
+  /* Colori dei badge Tipo (field_options.field = 'type'), stessa palette del DB */
+  --type-bar: #33465c;
+  --type-casa-quartiere: #2f6b4f;
+  --type-coworking: #7a4fa3;
+  --type-biblioteca: #c8862e;
+  --type-hostel: #b0508c;
+
+  /* --- Tipografia --- */
+  --font-display: 'Archivo', 'Arial Narrow', system-ui, sans-serif;
+  --font-body: 'Work Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --text-xs: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+  --text-sm: clamp(0.875rem, 0.84rem + 0.15vw, 0.9375rem);
+  --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --text-md: clamp(1.125rem, 1.06rem + 0.3vw, 1.25rem);
+  --text-lg: clamp(1.375rem, 1.25rem + 0.5vw, 1.75rem);
+  --text-xl: clamp(1.75rem, 1.5rem + 1vw, 2.5rem);
+  --text-2xl: clamp(2.25rem, 1.8rem + 2vw, 3.5rem);
+
+  --leading-tight: 1.15;
+  --leading-normal: 1.5;
+  --leading-loose: 1.7;
+
+  /* --- Spaziatura (scala 4px) --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  /* --- Raggi, ombre, bordi --- */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+  --shadow-sm: 0 1px 2px rgba(35, 33, 29, 0.08), 0 1px 1px rgba(35, 33, 29, 0.04);
+  --shadow-md: 0 8px 24px rgba(35, 33, 29, 0.12);
+  --shadow-lg: 0 16px 40px rgba(35, 33, 29, 0.18);
+
+  --container-max: 1180px;
+  --touch-target: 44px;
+
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-ink: #ece8df;
+    --color-ink-soft: #b7b2a4;
+    --color-paper: #1c1d22;
+    --color-paper-raised: #262832;
+    --surface-2: #2f313c;
+    --color-ochre: #e0a44f;
+    --color-ochre-ink: #ffe6bd;
+    --color-tram: #57a97f;
+    --color-tram-ink: #cdeedb;
+    --color-brick: #e2685a;
+    --color-brick-ink: #ffd9d2;
+    --color-dusk: #8fb3d9;
+    --color-border: #3a3c46;
+    --focus-ring: #8fb3d9;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.55);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+  }
+}

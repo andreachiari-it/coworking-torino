@@ -1,0 +1,90 @@
+-- seed.sql
+-- 1) field_options: the value lists used by the "enum-like" columns on
+--    spaces (validated by the trigger in 003_functions_triggers.sql) and
+--    editable later from the admin dashboard.
+-- 2) the 26 spaces from data/seed_spaces.sql, values unchanged from the
+--    Notion export. Coordinates are added separately by
+--    scripts/geocode.mjs -> supabase/seed_coordinates.sql, since the
+--    original Notion database had no lat/lng (its map was an embed).
+
+insert into public.field_options (field, value, color, sort_order) values
+  ('type', 'Bar/Locale', 'blue', 1),
+  ('type', 'Casa del Quartiere', 'green', 2),
+  ('type', 'Coworking a pagamento', 'purple', 3),
+  ('type', 'Biblioteca', 'orange', 4),
+  ('type', 'Hostel/Spazio ibrido', 'pink', 5),
+
+  ('zone', 'San Salvario', 'orange', 1),
+  ('zone', 'Centro', 'blue', 2),
+  ('zone', 'Barriera di Milano', 'red', 3),
+  ('zone', 'Porta Palazzo', 'yellow', 4),
+  ('zone', 'Vanchiglia', 'green', 5),
+  ('zone', 'Crocetta', 'purple', 6),
+  ('zone', 'Altro', 'gray', 7),
+
+  ('cost_type', 'Gratuito', 'green', 1),
+  ('cost_type', 'Consumazione obbligatoria', 'yellow', 2),
+  ('cost_type', 'Fisso €/giorno', 'blue', 3),
+
+  ('source', 'Esperienza diretta', 'green', 1),
+  ('source', 'Guida esterna', 'blue', 2),
+  ('source', 'Ricerca web', 'gray', 3),
+
+  ('personal_rating', '1', 'red', 1),
+  ('personal_rating', '2', 'orange', 2),
+  ('personal_rating', '3', 'yellow', 3),
+  ('personal_rating', '4', 'blue', 4),
+  ('personal_rating', '5', 'green', 5),
+  ('personal_rating', 'Non testato', 'gray', 6),
+
+  ('wifi_quality', 'Assente', 'red', 1),
+  ('wifi_quality', 'Lento', 'orange', 2),
+  ('wifi_quality', 'Buono', 'blue', 3),
+  ('wifi_quality', 'Ottimo', 'green', 4),
+
+  ('power_outlets', 'Assenti', 'red', 1),
+  ('power_outlets', 'Poche', 'orange', 2),
+  ('power_outlets', 'Abbondanti', 'green', 3),
+
+  ('call_space', 'Sala privata dedicata', 'green', 1),
+  ('call_space', 'Cabina telefonica', 'blue', 2),
+  ('call_space', 'Angolo isolato condiviso', 'yellow', 3),
+  ('call_space', 'Nessuno - rumoroso', 'red', 4),
+
+  ('mood', 'Silenzioso', 'blue', 1),
+  ('mood', 'Informale', 'green', 2),
+  ('mood', 'Studentesco', 'purple', 3),
+  ('mood', 'Elegante', 'pink', 4),
+  ('mood', 'Rumoroso', 'red', 5),
+  ('mood', 'Internazionale', 'orange', 6)
+on conflict (field, value) do nothing;
+
+-- Seed generato dal database Notion 'Coworking Torino' (26 spazi, estratti il 2026-09-28)
+insert into public.spaces (slug, name, type, zone, address, cost_type, price_per_day, source, personal_rating, wifi_quality, wifi_notes, power_outlets, call_space, mood, opening_hours, has_outdoor, booking_required, instagram_url, maps_url, last_verified_at, notes, notion_page_id, is_published) values
+  ('talent-garden-torino', 'Talent Garden Torino', 'Coworking a pagamento', null, 'Via del Carmine, zona Piazza Statuto, Torino', 'Fisso €/giorno', null, 'Ricerca web', null, null, null, null, null, '{}'::text[], 'Aperto 24h', false, false, 'https://www.instagram.com/talentgarden/', null, null, 'Network coworking digitale, 60 postazioni, sale riunioni. Prezzo storicamente ~250€/mese per abbonamento (dato 2013, da riverificare - i prezzi attuali non sono usciti nella ricerca).', '3d825df6-a8a2-8142-a71e-fbb0cd983100', true),
+  ('toolbox-coworking', 'Toolbox Coworking', 'Coworking a pagamento', 'Altro', 'Via Agostino da Montefeltro, 2, Torino', null, null, 'Ricerca web', null, null, null, null, 'Cabina telefonica', '{}'::text[], null, false, false, null, null, null, 'Day pass disponibile con prenotazione stessa giornata, accesso 24h, hot desk, silent zone, phone booth, wifi veloce, sale riunioni, caffè/stampa inclusi. Prezzo del day pass non trovato con certezza nelle ricerche - verificare su toolboxoffice.it.', '3d825df6-a8a2-818b-a256-d8c38fa4024e', true),
+  ('ogr-tech-by-talent-garden', 'OGR Tech by Talent Garden', 'Coworking a pagamento', 'Altro', 'Corso Castelfidardo 22, Torino', 'Gratuito', null, 'Ricerca web', 'Non testato', null, null, null, null, '{}'::text[], 'Chiude dalle 12 alle 15', false, false, null, 'https://maps.app.goo.gl/pWdoMewgF8m2EsCZ8', '2026-09-21', 'Hub innovazione dentro le OGR (Fondazione CRT), gestito da Talent Garden. Pensato per startup, scaleup e aziende. Tariffe non pubbliche: si richiedono al team (Community Manager sul sito Talent Garden). Da chiedere: esiste un day pass o solo abbonamento? Orari, wifi, prese e sale call da verificare di persona.', '3e225df6-a8a2-8136-8f7a-f551d33d6c7c', true),
+  ('spazio-quattro', '+Spazio Quattro', 'Casa del Quartiere', 'Altro', 'Via Gaspare Saccarelli 18, Quartiere San Donato, Torino (sede temporanea: Piazza Paravia 3/d)', 'Gratuito', null, 'Ricerca web', null, null, null, null, null, '{}'::text[], null, false, false, null, null, null, 'IMPORTANTE: la sede storica di via Saccarelli è attualmente CHIUSA per lavori PNRR. Attività rimodulate e diffuse in Piazza Paravia 3/d. Il sito cita esplicitamente un ''grande spazio di coworking'' tra i servizi offerti - potenzialmente il posto più rilevante della rete per smart working, ma verificare stato attuale prima di andarci.', '3d825df6-a8a2-81f3-bfb7-c8eb0a99a6e2', true),
+  ('casa-del-quartiere-barrito', 'Casa del Quartiere Barrito', 'Casa del Quartiere', 'Altro', 'Via Tepice 23, 10126 Torino (quartiere Nizza Millefonti)', 'Fisso €/giorno', 10, 'Esperienza diretta', '5', null, null, null, null, '{}'::text[], null, false, true, null, null, null, 'Gestito da Cooperativa Sociale Lancillotto. Contatto spazi: Orlando (spazi@barrito.to.it, 3289188826). COWORKING: prezzi seguono il sito ufficiale (barrito.to.it) - circa 10€/ora; pass settimanale con accesso 7 giorni a 70€ (~10€/giorno equivalente). SPAZI EVENTI/PRESENTAZIONI (diverso dal coworking): capienza 20-25 persone, presentazione/evento ~50€, prezzo variabile in base a quando. Il servizio di ristorazione/bar è attualmente in fase di riorganizzazione (dato Orlando, verificare stato aggiornato prima di contare su quello). Andrea ci è andato di persona e gli è piaciuto molto.', '3d825df6-a8a2-8194-a2a7-f2485d69c358', true),
+  ('tomato-urban-retreat', 'Tomato Urban Retreat', 'Hostel/Spazio ibrido', 'San Salvario', 'Via Silvio Pellico, 11, 10125 Torino', 'Fisso €/giorno', 5, 'Guida esterna', null, 'Ottimo', '300-500 Mbps', 'Abbondanti', null, array['Internazionale','Informale']::text[], '8:00-20:00 tutti i giorni', true, false, null, null, null, '5€/giorno con caffè incluso, unico con prezzo fisso reale tra gli spazi mappati', '3d825df6-a8a2-81e5-bae5-ec9dc5fe894d', true),
+  ('il-cecchi-point', 'Il Cecchi Point', 'Casa del Quartiere', 'Altro', 'Via Antonio Cecchi 17, 10152 Torino (Quartiere Aurora)', 'Gratuito', null, 'Ricerca web', null, null, null, null, null, array['Informale']::text[], 'Aperto 7 giorni su 7 (fascia oraria non specificata sul sito)', false, false, null, null, null, 'Gestito da Associazione Il Campanile Onlus. Aperto 7 giorni su 7. Focus su educativa/minori, teatro, sale prove musicali, ristorante Cecchi Mangia. Nessuna menzione esplicita di coworking.', '3d825df6-a8a2-813a-8ece-f8f15a756aba', true),
+  ('officine-caos-casa-del-quartiere-vallette', 'officine CAOS - Casa del Quartiere Vallette', 'Casa del Quartiere', 'Altro', 'Piazza Eugenio Montale 18, 10151 Torino (Le Vallette)', 'Gratuito', null, 'Ricerca web', null, 'Buono', 'Wifi gratuito confermato sul sito ufficiale', null, null, '{}'::text[], null, false, false, null, null, null, 'Gestito da Stalker Teatro Coop. Due sale da ~150mq accessibili a disabili, amplificazione/proiezione. Wifi gratuito confermato esplicitamente. Nessuna menzione di aree smart working dedicate ma spazi affittabili a contributo/gratis.', '3d825df6-a8a2-81ce-8728-e66a1a65d501', true),
+  ('bagni-pubblici-di-via-aglie', 'Bagni Pubblici di Via Agliè', 'Casa del Quartiere', 'Barriera di Milano', 'Via Agliè 9, 10154 Torino (Barriera di Milano)', 'Gratuito', null, 'Ricerca web', null, null, null, null, null, '{}'::text[], null, false, false, null, null, null, 'Gestiti da Cooperativa Sociale Liberitutti. Storico servizio docce pubbliche + Bistrò Acqua Alta, sartoria sociale, galleria d''arte, cortile. Nessuna menzione esplicita di coworking/smart working - impostazione più sociale/culturale che da postazione di lavoro.', '3d825df6-a8a2-81a4-82e8-c28f8135995e', true),
+  ('combo-torino', 'Combo Torino', 'Hostel/Spazio ibrido', 'Barriera di Milano', null, null, null, 'Ricerca web', null, 'Ottimo', null, 'Abbondanti', null, '{}'::text[], null, false, false, null, null, null, 'Ex spazio industriale recuperato, stile moderno, aperto mattina-tarda sera, anche hotel. [Dal corpo pagina Notion: 18€ full time + lunch]', '3d825df6-a8a2-8169-acaa-e226ffaaab09', true),
+  ('casa-nel-parco', 'Casa nel Parco', 'Casa del Quartiere', 'Altro', 'Via Panetti 1 (Parco Colonnetti), 10127 Torino (quartiere Mirafiori Sud)', 'Gratuito', null, 'Ricerca web', null, null, null, null, null, '{}'::text[], null, false, false, null, null, null, 'Gestita da Fondazione della Comunità di Mirafiori. Nessuna menzione esplicita di coworking sul sito - piuttosto sportelli sociali, doposcuola, corso italiano. Da verificare di persona se adatta a smart working.', '3d825df6-a8a2-81f2-b4fe-e7a2cf7e830b', true),
+  ('casa-del-quartiere-san-salvario', 'Casa del Quartiere San Salvario', 'Casa del Quartiere', 'San Salvario', 'Via Oddino Morgari, 14, 10125 Torino', 'Gratuito', null, 'Guida esterna', null, 'Lento', null, 'Abbondanti', null, array['Informale']::text[], 'Orario lavorativo continuato, anche weekend', true, false, null, null, null, 'Edificio liberty con cortile, bar interno per pranzo/aperitivo', '3d825df6-a8a2-8144-9332-e0c0ea787a62', true),
+  ('mercato-centrale-torino', 'Mercato Centrale Torino', 'Bar/Locale', 'Porta Palazzo', 'Piazza della Repubblica, 25, 10152 Torino', 'Gratuito', null, 'Guida esterna', null, 'Ottimo', 'Libero e gratuito', 'Assenti', null, array['Informale','Internazionale']::text[], '8:00-23:00 tutti i giorni', false, false, null, null, null, 'Molti stand street food, situazione prese complicata - portare pc carico', '3d825df6-a8a2-81db-810b-f62e93c1dc26', true),
+  ('via-baltea-3', 'Via Baltea 3', 'Bar/Locale', 'Barriera di Milano', 'Via Baltea, 3, 10154 Torino', 'Consumazione obbligatoria', null, 'Guida esterna', null, 'Ottimo', 'Libero, anche Free Torino Wifi', 'Poche', null, array['Informale']::text[], '11:00-24:00, domenica chiuso', true, false, null, null, null, 'Centro culturale dinamico con bar sociale', '3d825df6-a8a2-812b-af73-dcc592a6e6ae', true),
+  ('associazione-culturale-comala', 'Associazione Culturale Comala', 'Bar/Locale', 'Altro', 'C.so Francesco Ferrucci, 65/a, 10138 Torino', 'Gratuito', null, 'Guida esterna', null, 'Lento', null, 'Abbondanti', null, array['Studentesco','Informale']::text[], null, true, false, null, null, null, 'Spazio polifunzionale: sale prove, studi registrazione, aule laboratorio', '3d825df6-a8a2-81e0-a54e-d4eecbf1ec45', true),
+  ('bartu', 'BarTU', 'Bar/Locale', 'Altro', 'Via Cagliari, 28, 10153 Torino', 'Consumazione obbligatoria', null, 'Guida esterna', null, 'Ottimo', 'Libero e gratuito', 'Assenti', null, array['Informale']::text[], '8:00-23:00 tutti i giorni', true, false, null, null, null, 'Stile anni 70, gestione non sempre sorridente', '3d825df6-a8a2-811d-9ab8-f1daff208fe9', true),
+  ('berlicabarbis', 'Berlicabarbis', 'Bar/Locale', 'Altro', 'Via Catania, 10, 10153 Torino', 'Consumazione obbligatoria', null, 'Guida esterna', null, 'Assente', null, 'Poche', null, array['Informale']::text[], '7:00-19:00 circa', true, false, null, null, null, 'In declino, piano B se non ci sono alternative', '3d825df6-a8a2-8154-8a4f-d13128fad9a5', true),
+  ('cascina-roccafranca', 'Cascina Roccafranca', 'Casa del Quartiere', null, 'Via Edoardo Rubino, 43/A, 10137 Torino', null, null, 'Ricerca web', null, null, null, null, null, '{}'::text[], null, false, false, null, null, null, 'Parte della Rete Case del Quartiere Torino. Ospita anche un ristorante (Osteria Andirivieni) con orari propri. Wifi/prese/mood da verificare di persona.', '3d825df6-a8a2-81e6-be77-d686fdaafd0c', true),
+  ('mara-dei-boschi', 'Mara dei Boschi', 'Bar/Locale', 'Centro', 'Piazza Carlo Emanuele II, 21, Torino', 'Consumazione obbligatoria', null, 'Ricerca web', null, 'Buono', null, 'Abbondanti', null, array['Informale']::text[], '9:00-24:00 (1:00 ven/sab, 23:00 dom), chiuso lunedì mattina', false, false, 'https://www.instagram.com/maradeiboschi/', null, null, 'Gelateria/caffetteria Specialty, grande tavolo dedicato con prese, isolato dalla fila gelato', '3d825df6-a8a2-810e-8572-c0e6e3b92050', true),
+  ('rinascimenti-sociali', 'Rinascimenti Sociali', 'Coworking a pagamento', null, null, null, null, 'Ricerca web', null, null, null, null, null, '{}'::text[], null, false, false, null, null, null, 'Non sono riuscito a trovare conferme affidabili online (nessun sito ufficiale o scheda trovata con ricerche mirate) - possibile nome impreciso o spazio molto piccolo/poco indicizzato. Da verificare di persona o rimuovere se non esiste davvero.', '3d825df6-a8a2-81b5-bea7-d4c904092487', true),
+  ('costadoro-social-coffee-factory', 'Costadoro Social Coffee Factory', 'Bar/Locale', 'Centro', 'Via Teofilo Rossi di Montelera, 2, 10123 Torino', 'Consumazione obbligatoria', null, 'Guida esterna', null, 'Buono', 'Gratis solo 1 ora, poi a pagamento', 'Poche', null, array['Elegante']::text[], '8-12 e 14-17 lun-gio', true, false, null, null, null, 'Prezzi leggermente alti', '3d825df6-a8a2-815e-a450-e34d1374106b', true),
+  ('edit-torino-pub-e-ristorante', 'EDIT Torino (Pub e Ristorante)', 'Bar/Locale', 'Barriera di Milano', 'Piazza Teresa Noce, 15/A, 10155 Torino', 'Consumazione obbligatoria', null, 'Guida esterna', null, 'Ottimo', null, 'Abbondanti', null, array['Informale']::text[], '8:30-18:00 tutti i giorni', true, false, null, null, null, 'Ex complesso industriale, offerta pranzo 10€, musica un po'' alta', '3d825df6-a8a2-815f-b7cf-eb7f74a6f0d3', true),
+  ('bricks', 'Bricks', 'Bar/Locale', 'Centro', null, null, null, 'Ricerca web', null, null, null, null, null, '{}'::text[], null, false, false, null, null, null, 'Pizzeria vicino Porta Nuova, 10 tavoli dedicati a studio/lavoro, martedì-domenica, basta un''ordinazione', '3d825df6-a8a2-81e2-92eb-d572a856b7ad', true),
+  ('barney-s-circolo-dei-lettori', 'Barney''s (Circolo dei Lettori)', 'Bar/Locale', 'Centro', null, null, null, 'Ricerca web', null, 'Buono', '1h gratis, illimitato se ci si tessera al Circolo', null, null, array['Elegante']::text[], null, false, false, null, null, null, 'Palazzo storico, bar del Circolo dei Lettori', '3d825df6-a8a2-815d-84e6-f4cafc329e4c', true),
+  ('biblioteca-civica-centrale', 'Biblioteca Civica Centrale', 'Biblioteca', 'Centro', null, 'Gratuito', null, 'Ricerca web', null, null, null, null, null, array['Silenzioso']::text[], null, false, false, null, null, null, 'Opzione silenziosa, spesso dimenticata nelle guide smart working', '3d825df6-a8a2-8153-8c71-f48f765e42e0', true),
+  ('biblioteca-nazionale-universitaria', 'Biblioteca Nazionale Universitaria', 'Biblioteca', 'Centro', null, 'Gratuito', null, 'Ricerca web', null, null, null, null, null, array['Silenzioso']::text[], null, false, false, null, null, null, 'Opzione silenziosa', '3d825df6-a8a2-815b-b161-cbfba7bf2e73', true)
+on conflict (slug) do nothing;

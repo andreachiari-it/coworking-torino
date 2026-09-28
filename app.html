@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="it">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.tile.openstreetmap.org https://*.supabase.co https://cdn.jsdelivr.net; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://nominatim.openstreetmap.org; object-src 'none'; base-uri 'self'; form-action 'self';" />
+<title>Mappa — Coworking Torino</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/components.css" />
+<link rel="stylesheet" href="css/app.css" />
+
+<a class="skip-link" href="#app-map">Vai alla mappa</a>
+<a class="skip-link" href="#space-list">Vai alla lista</a>
+
+<div class="app-shell">
+  <header class="app-topbar">
+    <a class="logo" href="index.html">Coworking Torino</a>
+    <nav style="display:flex; gap: var(--space-3); align-items:center;">
+      <button class="btn btn-secondary btn-sm" id="suggest-space-button" type="button">Suggerisci uno spazio</button>
+      <a class="btn btn-ghost btn-sm" href="admin/index.html" id="admin-link" hidden>Admin</a>
+      <a class="btn btn-ghost btn-sm" href="profile.html">Profilo</a>
+      <button class="btn btn-ghost btn-sm" id="logout-button" type="button">Esci</button>
+    </nav>
+  </header>
+
+  <div class="app-body">
+    <section class="app-list-pane" id="app-list-pane">
+      <div class="app-sheet-handle" id="app-sheet-handle" role="button" tabindex="0" aria-label="Ridimensiona la lista" aria-expanded="true"></div>
+
+      <div class="app-list-toolbar">
+        <button class="btn btn-secondary btn-sm app-mobile-toggle" id="toggle-map-list" type="button">Mappa</button>
+        <span class="app-result-count" id="result-count" aria-live="polite"></span>
+        <select class="app-sort-select" id="sort-select" aria-label="Ordina per"></select>
+        <button class="btn btn-ghost btn-sm" id="toggle-filters" type="button" aria-expanded="false" aria-controls="filter-panel">Filtri</button>
+      </div>
+
+      <div class="app-filter-panel" id="filter-panel" hidden></div>
+
+      <div class="app-list" id="space-list" aria-live="polite">
+        <div class="space-card-skeleton skeleton"></div>
+        <div class="space-card-skeleton skeleton"></div>
+        <div class="space-card-skeleton skeleton"></div>
+      </div>
+    </section>
+
+    <div class="app-map-pane">
+      <div id="app-map"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script type="module" src="js/pages/app.js"></script>
+</html>

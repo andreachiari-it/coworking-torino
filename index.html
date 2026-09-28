@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="it">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.tile.openstreetmap.org https://*.supabase.co https://cdn.jsdelivr.net; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://nominatim.openstreetmap.org; object-src 'none'; base-uri 'self'; form-action 'self';" />
+<title>Coworking Torino — dove lavorare in città, senza tirare a indovinare</title>
+<meta name="description" content="Una mappatura onesta di dove lavorare a Torino: coworking, bar, Case del Quartiere e biblioteche, con costi, wifi, prese e atmosfera reali. Nessun posto inventato." />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Coworking Torino — dove lavorare in città" />
+<meta property="og:description" content="Costi, wifi, prese, spazio per le call. Spazi veri, raccontati con onestà, prima di fare mezza città a tentativi." />
+<meta property="og:image" content="assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="it_IT" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Coworking Torino — dove lavorare in città" />
+<meta name="twitter:description" content="Costi, wifi, prese, spazio per le call. Spazi veri, raccontati con onestà." />
+<meta name="twitter:image" content="assets/og-image.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/components.css" />
+
+<style>
+  .site-header {
+    padding: var(--space-4) 0;
+  }
+  .site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+  .logo {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: var(--text-md);
+    text-decoration: none;
+    color: var(--text-1);
+  }
+
+  .hero {
+    padding: var(--space-7) 0 var(--space-8);
+  }
+  .hero .container {
+    display: grid;
+    gap: var(--space-6);
+  }
+  .hero h1 {
+    max-width: 18ch;
+  }
+  .hero-lede {
+    font-size: var(--text-md);
+    color: var(--text-2);
+    max-width: 52ch;
+    margin-top: var(--space-4);
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+  .hero-mark {
+    display: flex;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+  .hero-mark .roundel {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: var(--text-xs);
+  }
+  .hero-mark .roundel:nth-child(2) {
+    background: var(--confirm);
+  }
+  .hero-mark .roundel:nth-child(3) {
+    background: var(--color-dusk);
+  }
+
+  section {
+    padding: var(--space-8) 0;
+  }
+  section.alt {
+    background: var(--surface-1);
+  }
+  .section-heading {
+    max-width: 42ch;
+    margin-bottom: var(--space-6);
+  }
+  .section-heading p {
+    color: var(--text-2);
+    margin-top: var(--space-3);
+  }
+
+  .prose {
+    max-width: 62ch;
+    display: grid;
+    gap: var(--space-4);
+    color: var(--text-2);
+    font-size: var(--text-md);
+    line-height: var(--leading-loose);
+  }
+  .prose strong {
+    color: var(--text-1);
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+  }
+  .stat {
+    background: var(--surface-1);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label {
+    margin-top: var(--space-2);
+    color: var(--text-2);
+    font-size: var(--text-sm);
+  }
+
+  .teaser-samples {
+    margin-top: var(--space-6);
+    display: grid;
+    gap: var(--space-2);
+  }
+  .teaser-sample {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-1);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+  }
+  .teaser-sample-name {
+    font-weight: 600;
+  }
+  .teaser-sample-meta {
+    color: var(--text-2);
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+  }
+  .feature-card {
+    padding: var(--space-5);
+  }
+  .feature-card h3 {
+    font-size: var(--text-md);
+    margin-bottom: var(--space-2);
+  }
+  .feature-card p {
+    color: var(--text-2);
+  }
+
+  .source-legend {
+    display: grid;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+  }
+  .source-item {
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+    padding: var(--space-4);
+    background: var(--surface-1);
+    border-radius: var(--radius-md);
+  }
+  .source-item .badge {
+    flex-shrink: 0;
+  }
+
+  /* --- Sezione accesso / OTP --- */
+  .auth-card {
+    max-width: 460px;
+    margin-inline: auto;
+    text-align: left;
+  }
+  .auth-card h2 {
+    text-align: center;
+  }
+  .auth-card .field {
+    margin-top: var(--space-5);
+  }
+  .step-actions {
+    margin-top: var(--space-5);
+    display: grid;
+    gap: var(--space-3);
+  }
+  .resend-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    font-size: var(--text-xs);
+    color: var(--text-2);
+    margin-top: var(--space-4);
+  }
+  .already-in {
+    text-align: center;
+  }
+  .whatsapp-join-cta {
+    margin-top: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-2);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+  }
+
+  .site-footer {
+    padding: var(--space-7) 0;
+    border-top: 1px solid var(--color-border);
+    color: var(--text-2);
+    font-size: var(--text-sm);
+  }
+  .site-footer .container {
+    display: grid;
+    gap: var(--space-4);
+  }
+  .site-footer a {
+    color: var(--text-2);
+  }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+</style>
+
+<a class="skip-link" href="#main">Vai al contenuto</a>
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="index.html">Coworking Torino</a>
+    <a class="btn btn-secondary btn-sm" href="#accedi">Entra con la tua email</a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="container">
+      <div class="hero-mark" aria-hidden="true">
+        <span class="roundel">●</span>
+        <span class="roundel">●</span>
+        <span class="roundel">●</span>
+      </div>
+      <h1>Dove si lavora a Torino, se casa tua ti ha stufato?</h1>
+      <p class="hero-lede">
+        Una mappatura onesta degli spazi dove lavorare in città — coworking, bar, Case del Quartiere, biblioteche —
+        con costi, wifi, prese e atmosfera come sono davvero, non come vorremmo che fossero.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#accedi">Entra con la tua email</a>
+        <a class="btn btn-secondary" href="#community">Unisciti al gruppo WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Il problema</h2>
+      </div>
+      <div class="prose">
+        <p>
+          Lavorare da casa è bello, finché non smette di esserlo. Il divano diventa ufficio, l'ufficio diventa
+          cucina, e alle tre del pomeriggio stai facendo una call col frigo alle spalle.
+        </p>
+        <p>
+          Il problema è che uscire non è così semplice. Le informazioni sono sparse ovunque, i coworking non dicono
+          quanto costano, i bar <strong>"tollerano"</strong> chi lavora ma non sai se c'è il wifi, se ci sono le
+          prese o se dopo un'ora ti guardano storto. E intanto c'è l'idea che per avere una scrivania decente serva
+          spendere un capitale.
+        </p>
+        <p>
+          Così abbiamo messo tutto in un posto solo: dove sono gli spazi, quanto costano, com'è il wifi, se ci sono
+          prese e sale per le call, che atmosfera hanno. Solo spazi che esistono già, raccontati con onestà, così
+          scegli con la testa — e col portafoglio — senza fare mezza città a tentativi.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="cosa-trovi">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Cosa trovi dentro</h2>
+        <p>Numeri reali, aggiornati con la guida.</p>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-value" id="teaser-count-spaces">—</div>
+          <div class="stat-label">spazi mappati</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="teaser-count-free">—</div>
+          <div class="stat-label">completamente gratuiti</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="teaser-count-zones">—</div>
+          <div class="stat-label">zone della città</div>
+        </div>
+      </div>
+
+      <ul role="list" class="teaser-samples" id="teaser-samples"></ul>
+
+      <div class="feature-grid">
+        <div class="card feature-card">
+          <h3>Costo</h3>
+          <p>Gratuito, consumazione obbligatoria o prezzo fisso al giorno — mai un mistero.</p>
+        </div>
+        <div class="card feature-card">
+          <h3>Wifi e prese</h3>
+          <p>Qualità della connessione e quante prese trovi davvero, non "wifi disponibile" e basta.</p>
+        </div>
+        <div class="card feature-card">
+          <h3>Spazio per le call</h3>
+          <p>Sala dedicata, cabina, angolo isolato o niente — così sai prima se puoi fare quella call.</p>
+        </div>
+        <div class="card feature-card">
+          <h3>Atmosfera e orari</h3>
+          <p>Silenzioso o informale, aperto quando ti serve: il mood conta quanto la scrivania.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="container">
+      <div class="section-heading">
+        <h2>Come leggerla</h2>
+      </div>
+      <div class="source-legend">
+        <div class="source-item">
+          <span class="badge badge-source">Provato da Andrea</span>
+          <p>Esperienza diretta: ci sono stato di persona, i dati sono affidabili.</p>
+        </div>
+        <div class="source-item">
+          <span class="badge badge-source">Da guida esterna</span>
+          <p>Arriva da una guida esterna agli spazi di lavoro condiviso di Torino.</p>
+        </div>
+        <div class="source-item">
+          <span class="badge badge-source">Da verificare</span>
+          <p>Ricerca web, o non ancora testato di persona: prendi questi dati con le pinze.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="community">
+    <div class="container">
+      <div class="section-heading">
+        <h2>La community</h2>
+        <p>La guida vive dentro un gruppo WhatsApp di persone che lavorano fuori casa a Torino.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="card feature-card">
+          <h3>"Ci vado"</h3>
+          <p>Dici dove lavori domani, qualcuno ti raggiunge. Niente più "chi va dove" a caso nella chat.</p>
+        </div>
+        <div class="card feature-card">
+          <h3>Recensioni</h3>
+          <p>Chi c'è stato lascia un voto e due righe vere: wifi, prese, rumore, quello che conta davvero.</p>
+        </div>
+        <div class="card feature-card">
+          <h3>Segnalazioni</h3>
+          <p>Trovi un posto nuovo o un dato sbagliato? Lo segnali tu, lo verifichiamo e aggiorniamo la guida.</p>
+        </div>
+      </div>
+      <div class="hero-actions" style="margin-top: var(--space-6);">
+        <a class="btn btn-confirm" id="whatsapp-cta" href="#" target="_blank" rel="noopener noreferrer">Unisciti al gruppo WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="accedi">
+    <div class="container">
+      <div class="card auth-card">
+        <div id="step-email">
+          <h2>Entra con la tua email</h2>
+          <p style="text-align: center; color: var(--text-2); margin-top: var(--space-2);">
+            Niente password: ti mandiamo un codice a 6 cifre.
+          </p>
+          <form id="otp-email-form" novalidate>
+            <div class="field">
+              <label class="field-label" for="otp-email">Email</label>
+              <input class="input" type="email" id="otp-email" name="email" autocomplete="email" required placeholder="tu@esempio.it" />
+            </div>
+            <div class="step-actions">
+              <button class="btn btn-primary btn-block" type="submit" id="otp-email-submit">Invia il codice</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="step-code" hidden>
+          <h2>Controlla la tua email</h2>
+          <p style="text-align: center; color: var(--text-2); margin-top: var(--space-2);">
+            Codice inviato a <strong id="code-step-email"></strong>.
+          </p>
+          <form id="otp-code-form" novalidate>
+            <div class="field">
+              <label class="field-label" for="otp-code">Codice a 6 cifre</label>
+              <input
+                class="input otp-input"
+                type="text"
+                id="otp-code"
+                name="code"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                pattern="[0-9]*"
+                maxlength="6"
+                required
+              />
+              <p class="field-error" id="otp-error" aria-live="polite"></p>
+            </div>
+            <div class="step-actions">
+              <button class="btn btn-primary btn-block" type="submit" id="otp-code-submit">Conferma codice</button>
+            </div>
+          </form>
+          <div class="resend-row">
+            <button class="btn-ghost btn-sm" type="button" id="otp-resend">Rinvia codice</button>
+            <span id="otp-resend-timer"></span>
+            <button class="btn-ghost btn-sm" type="button" id="otp-change-email">Cambia email</button>
+          </div>
+        </div>
+
+        <div id="step-onboarding" hidden>
+          <h2>Ultima cosa</h2>
+          <p style="text-align: center; color: var(--text-2); margin-top: var(--space-2);">
+            Così sappiamo come chiamarti nella community.
+          </p>
+          <form id="onboarding-form" novalidate>
+            <div class="field">
+              <label class="field-label" for="display-name">Nome da mostrare</label>
+              <input class="input" type="text" id="display-name" name="display-name" autocomplete="name" required maxlength="60" />
+            </div>
+
+            <div class="field" style="margin-top: var(--space-5);">
+              <span class="field-label">Sei già nel gruppo WhatsApp?</span>
+              <div class="radio-group">
+                <label><input type="radio" name="whatsapp-member" value="si" /> Sì</label>
+                <label><input type="radio" name="whatsapp-member" value="no" checked /> No</label>
+              </div>
+              <div class="whatsapp-join-cta" id="whatsapp-join-cta">
+                Niente male iniziare da qui: <a id="whatsapp-join-link" href="#" target="_blank" rel="noopener noreferrer">entra nel gruppo</a>.
+              </div>
+            </div>
+
+            <div class="field" style="margin-top: var(--space-5);">
+              <label class="checkbox-row">
+                <input type="checkbox" id="show-in-checkins" checked />
+                <span>Mostra il mio nome quando dico "Ci vado" in uno spazio</span>
+              </label>
+            </div>
+
+            <div class="field" style="margin-top: var(--space-5);">
+              <label class="checkbox-row">
+                <input type="checkbox" id="privacy-accept" required />
+                <span>Ho letto la <a href="privacy.html" target="_blank">informativa privacy</a></span>
+              </label>
+            </div>
+
+            <p class="field-error" id="onboarding-error" aria-live="polite" style="margin-top: var(--space-3);"></p>
+
+            <div class="step-actions">
+              <button class="btn btn-primary btn-block" type="submit">Inizia a usare la guida</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="step-already-in" class="already-in" hidden>
+          <h2>Bentornato/a</h2>
+          <p style="color: var(--text-2); margin-top: var(--space-2);">Hai già fatto accesso.</p>
+          <div class="step-actions">
+            <a class="btn btn-primary btn-block" id="already-in-link" href="app.html">Vai alla mappa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>
+      Un progetto di <a href="https://cambio-vita.it" target="_blank" rel="noopener noreferrer">Andrea Chiari — Cambio Vita</a>.
+    </p>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="mailto:andrea.chiari@cambio-vita.it">Contattami</a>
+      <span>Dati mappa © collaboratori di OpenStreetMap</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/pages/landing.js"></script>
+</html>

@@ -1,0 +1,52 @@
+<!--
+  Template email OTP per Coworking Torino.
+  Da incollare in Supabase: Authentication → Email Templates → "Magic Link"
+  (Supabase usa questo template anche per l'OTP a 6 cifre via
+  signInWithOtp/verifyOtp — la variabile che conta è {{ .Token }}).
+  Sostituisci anche il template "Confirm signup" con lo stesso contenuto,
+  così il primo accesso e i successivi usano lo stesso messaggio.
+
+  Scritto con stili inline e tabelle, come richiedono i client email:
+  niente <style> esterno, niente flexbox/grid.
+-->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#efeee9;padding:32px 16px;font-family:Arial,Helvetica,sans-serif;">
+  <tr>
+    <td align="center">
+      <table role="presentation" width="480" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:16px;overflow:hidden;max-width:480px;width:100%;">
+        <tr>
+          <td style="background-color:#c8862e;padding:24px 32px;">
+            <span style="color:#ffffff;font-size:18px;font-weight:bold;">Coworking Torino</span>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:32px;">
+            <p style="margin:0 0 16px;color:#23211d;font-size:16px;line-height:1.5;">
+              Ciao,
+            </p>
+            <p style="margin:0 0 24px;color:#23211d;font-size:16px;line-height:1.5;">
+              questo è il tuo codice per entrare nella guida agli spazi dove lavorare a Torino:
+            </p>
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td align="center" style="background-color:#efeee9;border-radius:12px;padding:24px;">
+                  <span style="font-size:36px;font-weight:bold;letter-spacing:8px;color:#23211d;font-family:'Courier New',monospace;">{{ .Token }}</span>
+                </td>
+              </tr>
+            </table>
+            <p style="margin:24px 0 0;color:#5b5850;font-size:14px;line-height:1.5;">
+              Il codice scade tra un'ora e vale solo per un accesso. Se non hai richiesto tu questo codice, ignora
+              pure questa email: nessuno può entrare senza saperlo.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:16px 32px 32px;border-top:1px solid #efeee9;">
+            <p style="margin:16px 0 0;color:#5b5850;font-size:12px;line-height:1.5;">
+              Un progetto di Andrea Chiari — Cambio Vita.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

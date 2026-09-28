@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="it">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.tile.openstreetmap.org https://*.supabase.co https://cdn.jsdelivr.net; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://nominatim.openstreetmap.org; object-src 'none'; base-uri 'self'; form-action 'self';" />
+<title>Profilo — Coworking Torino</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/components.css" />
+
+<style>
+  .profile-page {
+    max-width: 640px;
+    margin-inline: auto;
+    padding: var(--space-6) var(--space-5) var(--space-8);
+  }
+  .profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-6);
+  }
+  .profile-header .logo {
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-decoration: none;
+    color: var(--text-1);
+  }
+  .profile-section {
+    margin-top: var(--space-7);
+  }
+  .profile-section h2 {
+    margin-bottom: var(--space-4);
+  }
+  .checkin-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-1);
+    border-radius: var(--radius-sm);
+    margin-top: var(--space-2);
+  }
+  .checkin-row-day {
+    font-weight: 700;
+    min-width: 9ch;
+  }
+  .review-card {
+    display: grid;
+    gap: var(--space-2);
+  }
+  .danger-zone {
+    border: 2px solid var(--danger);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+  }
+</style>
+
+<a class="skip-link" href="#main">Vai al contenuto</a>
+
+<header class="profile-header">
+  <a class="logo" href="app.html">Coworking Torino</a>
+  <button class="btn btn-ghost btn-sm" id="logout-button" type="button">Esci</button>
+</header>
+
+<main class="profile-page" id="main">
+  <h1>Il tuo profilo</h1>
+
+  <section class="profile-section">
+    <form id="profile-form">
+      <div class="field">
+        <label class="field-label" for="profile-name">Nome da mostrare</label>
+        <input class="input" id="profile-name" maxlength="60" required />
+      </div>
+      <div class="field" style="margin-top: var(--space-4);">
+        <label class="checkbox-row">
+          <input type="checkbox" id="profile-show-checkins" />
+          <span>Mostra il mio nome quando dico "Ci vado" in uno spazio</span>
+        </label>
+      </div>
+      <button class="btn btn-primary" type="submit" style="margin-top: var(--space-5);">Salva modifiche</button>
+    </form>
+  </section>
+
+  <section class="profile-section">
+    <h2>I tuoi check-in in programma</h2>
+    <div id="my-checkins"></div>
+  </section>
+
+  <section class="profile-section">
+    <h2>Le tue recensioni</h2>
+    <div id="my-reviews"></div>
+  </section>
+
+  <section class="profile-section">
+    <h2>Le tue segnalazioni</h2>
+    <div id="my-suggestions"></div>
+  </section>
+
+  <section class="profile-section">
+    <h2>I tuoi dati</h2>
+    <p class="field-hint">Puoi scaricare una copia di tutto quello che hai condiviso con la guida.</p>
+    <button class="btn btn-secondary" id="export-data-button" type="button" style="margin-top: var(--space-3);">Esporta i miei dati (JSON)</button>
+  </section>
+
+  <section class="profile-section danger-zone">
+    <h2>Elimina account</h2>
+    <p class="field-hint">Cancella il tuo profilo, i check-in, le recensioni e le segnalazioni. Non si può annullare.</p>
+    <button class="btn btn-danger" id="delete-account-button" type="button" style="margin-top: var(--space-3);">Elimina il mio account</button>
+  </section>
+</main>
+
+<script type="module" src="js/pages/profile.js"></script>
+</html>

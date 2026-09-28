@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.tile.openstreetmap.org https://*.supabase.co https://cdn.jsdelivr.net; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://nominatim.openstreetmap.org; object-src 'none'; base-uri 'self'; form-action 'self';" />
+<title>Privacy — Coworking Torino</title>
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/components.css" />
+<style>
+  main {
+    max-width: 720px;
+    margin-inline: auto;
+    padding: var(--space-7) var(--space-5) var(--space-8);
+  }
+  main h2 {
+    margin-top: var(--space-6);
+  }
+  main p,
+  main li {
+    color: var(--text-2);
+    margin-top: var(--space-3);
+  }
+  a.back {
+    display: inline-block;
+    margin-bottom: var(--space-5);
+  }
+</style>
+
+<a class="skip-link" href="#main">Vai al contenuto</a>
+
+<main id="main">
+  <a class="back" href="index.html">← Torna alla home</a>
+  <h1>Informativa privacy</h1>
+  <p>Ultimo aggiornamento: 28 settembre 2026</p>
+
+  <h2>Titolare del trattamento</h2>
+  <p>Andrea Chiari — Cambio Vita. Contatto: <a href="mailto:andrea.chiari@cambio-vita.it">andrea.chiari@cambio-vita.it</a></p>
+
+  <h2>Dati trattati</h2>
+  <p>
+    Indirizzo email (per l'accesso via codice OTP), nome visibile che scegli tu, i tuoi check-in ("Ci vado"), le
+    recensioni che scrivi e le segnalazioni che invii.
+  </p>
+
+  <h2>Finalità</h2>
+  <p>
+    Farti accedere alla guida in modo sicuro, mostrare chi lavora dove e quando all'interno della community,
+    raccogliere recensioni e segnalazioni per mantenere aggiornata l'anagrafica degli spazi.
+  </p>
+
+  <h2>Base giuridica</h2>
+  <p>
+    Consenso dell'interessato (art. 6.1.a GDPR), che dai creando un account con il codice di accesso via email;
+    esecuzione di un servizio richiesto (art. 6.1.b GDPR) per le funzionalità di base della guida — vedere gli
+    spazi, segnare "Ci vado", scrivere recensioni e segnalazioni.
+  </p>
+
+  <h2>Conservazione</h2>
+  <p>
+    I tuoi dati restano finché il tuo account è attivo. Se lo elimini dalla pagina Profilo, i dati applicativi
+    (check-in, recensioni, segnalazioni, nome visibile) e il tuo account di accesso vengono cancellati subito;
+    eventuali copie di backup del database vengono sovrascritte entro i tempi tecnici standard di Supabase.
+  </p>
+
+  <h2>I tuoi diritti</h2>
+  <p>
+    Puoi in ogni momento esportare i tuoi dati o eliminare il tuo account dalla pagina
+    <a href="profile.html">Profilo</a>. Per qualsiasi altra richiesta (accesso, rettifica, opposizione) scrivi a
+    <a href="mailto:andrea.chiari@cambio-vita.it">andrea.chiari@cambio-vita.it</a>.
+  </p>
+
+  <h2>Cookie</h2>
+  <p>
+    Nessun cookie di profilazione. Il sito usa solo lo storage tecnico necessario a mantenere la sessione di
+    accesso.
+  </p>
+
+  <h2>Fornitori terzi</h2>
+  <ul role="list">
+    <li>Supabase (database, autenticazione, hosting dei dati) — Unione Europea.</li>
+    <li>Resend (invio dell'email con il codice di accesso).</li>
+    <li>OpenStreetMap / Nominatim (mappa e geocoding degli indirizzi).</li>
+  </ul>
+</main>
+</html>
