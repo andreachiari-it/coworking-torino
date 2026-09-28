@@ -359,6 +359,21 @@ sito online** (Chrome DevTools → Lighthouse, o [PageSpeed
 Insights](https://pagespeed.web.dev)) e dimmi cosa trovi: se emerge
 qualcosa di concreto lo sistemiamo.
 
+## Fase 6 (aggiunta, dopo il primo deploy reale) — `js/config.js` va committato
+
+Bug reale, trovato solo testando il deploy vero su Netlify: in Fase 1 avevo
+messo `js/config.js` nel `.gitignore` per prudenza. Ma questo sito non ha
+nessun passaggio di build (per scelta, deve girare da cartella statica
+pura) — quindi su Netlify quel file semplicemente non esisteva, e ogni
+pagina che ne ha bisogno (login, mappa, link WhatsApp) falliva in silenzio
+con un 404. L'ho scoperto guardando gli errori di rete sul sito online, non
+in locale, dove il file c'era per forza di cose.
+
+La chiave `anon` di Supabase è pubblica per design — non è un segreto da
+proteggere, è pensata per stare nel codice del client — quindi includere
+`js/config.js` nel repository non è un problema di sicurezza. Rimosso dal
+`.gitignore` e committato con i valori reali.
+
 ## Da decidere più avanti (segnaposto)
 
 - Palette colori e font (Fase 2, va in questo stesso file prima di scrivere CSS).
